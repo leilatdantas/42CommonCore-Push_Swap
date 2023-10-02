@@ -6,7 +6,7 @@
 #    By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 11:49:39 by lebarbos          #+#    #+#              #
-#    Updated: 2023/10/02 13:00:30 by lebarbos         ###   ########.fr        #
+#    Updated: 2023/10/02 13:10:31 by lebarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ WHITE 	= \033[1;37m
 #COMMANDS
 RM = rm -rf
 AR = ar -rcs
-# UNAME = $(shell uname)
 
 #FLAGS
 CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=address
@@ -32,6 +31,7 @@ LFLAGS	= -L ./libft -lft
 
 #PATHS
 DEPS			= include
+HEADERS			= include/push_swap.h include/libft.h
 SRCS			= srcs/push_swap
 # SRCS_BONUS		= srcs_bonus
 LIBFT_PATH		= libft
@@ -52,7 +52,7 @@ TARGET_BONUS	= $(addprefix $(OBJ_PATH_BONUS)/, $(OBJS_BONUS))
 #RULES 
 all: $(NAME)
 
-$(NAME): $(OBJ_PATH) $(TARGET)
+$(NAME): $(OBJ_PATH) $(TARGET) $(HEADERS)
 	echo "$(MAGENTA)🤔 Compiling:$(RESET) $(GREEN)libft/*$(RESET)"
 	make -C $(LIBFT_PATH)
 	

@@ -6,13 +6,13 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/02 12:59:07 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:12:58 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int main ()
+int	main(void)
 {
 	write(1, "E ai?\n", 7);
 	return (0);
