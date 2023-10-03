@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/03 14:40:14 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:53:30 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	main(int argc, char **argv)
 {
 	t_stack *a;
 	
-	a = NULL;
+	// a = NULL;
+	a = get_stack(argc, argv);
 	if (argc <= 1)
 	{
 		write(1, "Error\n", 7);
@@ -44,8 +45,12 @@ int	main(int argc, char **argv)
 		write(1, "Error\n", 7);
 		exit(1);
 	}
-	else
-		a = get_stack(argc, argv);
-	// if(!check_repeat(&a));
+	// else
+	if(!check_repeat(a))
+	{
+		write(1, "Error\n", 7);
+		exit(1);
+	}
 	test_print(a);
+	// ft_stackclear()
 }

@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:54:09 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/03 14:43:31 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:44:52 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,38 @@ bool	check_number(char *nbr)
 	{
 		if (ft_isalpha(*nbr))
 			return (false);
-		else if (!ft_isalnum(*nbr))
+		else if ((!ft_isalnum(*nbr)) && (*nbr != '-' && *nbr != '+'))
 			return (false);
 		nbr++;
 	}
 	return(true);
 }
 
-//  make f
+bool	check_repeat(t_stack *a)
+{
+	long *nbrs;
+	int i;
+	int j;
+	bool result;
+
+	i = 0;
+	j = 0;
+	result = true;
+	nbrs = (long *)malloc(sizeof(long) * ft_stack_size(a));
+	while(nbrs[i])
+	{
+		j = i + 1;
+		while (j < ft_stack_size(a))
+		{
+			if (nbrs[i] == nbrs[j])
+				result = false;
+			j++;
+		}
+		i++;
+	}
+	free(nbrs);
+	return (result);
+}
 
 bool	validate_stack(int argc, char **argv)
 {
