@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:54:09 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/03 14:40:59 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:43:31 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ bool	validate_stack(int argc, char **argv)
 	bool	result;
 
 	i = 1;
+	result = true;
 	while (i < argc)
 	{
-		result =+ check_number(argv[i]);
+		result = result && check_number(argv[i]);
 		i++;
 	}
 	return(result);
