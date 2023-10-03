@@ -1,51 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/03 14:40:14 by lebarbos         ###   ########.fr       */
+/*   Created: 2023/10/03 12:54:09 by lebarbos          #+#    #+#             */
+/*   Updated: 2023/10/03 14:40:59 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+// #include "../../libft.h"
+#include <limits.h>
 
-t_stack *get_stack(int argc, char **argv)
+bool	check_number(char *nbr)
 {
-	int i;
-	t_stack *a;
-	int	j;
-	
-	i = 1;
-	a = NULL;
-	while (i < argc)
+	long n;
+
+	n = ft_atoi2(nbr);
+	if (n > INT_MAX || n < INT_MIN)
+		return (false);
+	while(*nbr)
 	{
-		j = ft_atoi2(argv[i]);
-		ft_stackadd_back(&a, ft_stack_new(j));
-		i++;
+		if (ft_isalpha(*nbr))
+			return (false);
+		else if (!ft_isalnum(*nbr))
+			return (false);
+		nbr++;
 	}
-	return (a);
+	return(true);
 }
 
-int	main(int argc, char **argv)
+//  make f
+
+bool	validate_stack(int argc, char **argv)
 {
-	t_stack *a;
-	
-	a = NULL;
-	if (argc <= 1)
+	int	i;
+	bool	result;
+
+	i = 1;
+	while (i < argc)
 	{
-		write(1, "Error\n", 7);
-		exit(1);
+		result =+ check_number(argv[i]);
+		i++;
 	}
-	if(!validate_stack(argc, argv))
-	{
-		write(1, "Error\n", 7);
-		exit(1);
-	}
-	else
-		a = get_stack(argc, argv);
-	// if(!check_repeat(&a));
-	test_print(a);
+	return(result);
 }
