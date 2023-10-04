@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/03 15:55:17 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:52:27 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,27 +84,34 @@ long	ft_atoi2(char *str)
 	return (result * sign);
 }
 
-// void	ft_stackdelone(t_stack *stack, void (*del)(long x))
-// {
-// 	if (!stack || !del)
-// 		return ;
-// 	del(stack->nbr);
-// 	free(stack);
-// }
+void ft_free(void *x)
+{
+	if (!x)
+		return ;
+	free(x);
+}
 
-// void	ft_stackclear(t_stack **stack, void (*del)(void*))
-// {
-// 	t_stack	*aux;
+void	ft_stackdelone(t_stack *stack, void (*del)(void*))
+{
+	if (!stack || !del)
+		return ;
+	// del(stack->nbr);
+	free(stack);
+}
 
-// 	if (!*stack || !del)
-// 		return ;
-// 	while (*stack)
-// 	{
-// 		aux = (*stack)->next;
-// 		ft_stackdelone(*stack, del);
-// 		*stack = aux;
-// 	}
-// }
+void	ft_stackclear(t_stack **stack, void (*del)(void*))
+{
+	t_stack	*aux;
+
+	if (!*stack || !del)
+		return ;
+	while (*stack)
+	{
+		aux = (*stack)->next;
+		ft_stackdelone(*stack, del);
+		*stack = aux;
+	}
+}
 
 void	test_print(t_stack *a)
 {
