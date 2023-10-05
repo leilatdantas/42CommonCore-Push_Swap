@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/04 20:28:27 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:17:25 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,28 @@ int	ft_stack_size(t_stack *stack)
 	return (count);
 }
 
-long	ft_atoi2(char *str)
-{
-	long	result;
-	long	sign;
+// long	ft_atoi2(char *str)
+// {
+// 	long	result;
+// 	long	sign;
 
-	result = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign = sign * (-1);
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - 48);
-		str++;
-	}
-	return (result * sign);
-}
+// 	result = 0;
+// 	sign = 1;
+// 	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+// 		str++;
+// 	if (*str == '+' || *str == '-')
+// 	{
+// 		if (*str == '-')
+// 			sign = sign * (-1);
+// 		str++;
+// 	}
+// 	while (*str >= '0' && *str <= '9')
+// 	{
+// 		result = result * 10 + (*str - 48);
+// 		str++;
+// 	}
+// 	return (result * sign);
+// }
 
 void ft_free(void *x)
 {

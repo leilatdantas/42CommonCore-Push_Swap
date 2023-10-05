@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/04 20:19:26 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/05 19:18:20 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_stack *get_stack(int argc, char **argv)
 	a = NULL;
 	while (i < argc)
 	{
-		j = ft_atoi2(argv[i]);
+		j = ft_atoi(argv[i]);
 		ft_stackadd_back(&a, ft_stack_new(j));
 		i++;
 	}
