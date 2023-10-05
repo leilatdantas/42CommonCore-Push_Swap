@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/04 15:11:25 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:19:34 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool	check_repeat(t_stack *a);
 void	ft_stackclear(t_stack **stack, void (*del)(void*));
 void	ft_free(void *x);
 void	ft_stackdelone(t_stack *stack, void (*del)(void*));
+void	ft_error_print(t_stack **a);
 
 bool	validate_stack(int argc, char **argv);
 

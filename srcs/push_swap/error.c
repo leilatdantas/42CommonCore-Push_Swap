@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/04 20:19:26 by lebarbos         ###   ########.fr       */
+/*   Created: 2023/10/04 20:16:27 by lebarbos          #+#    #+#             */
+/*   Updated: 2023/10/04 20:19:49 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-t_stack *get_stack(int argc, char **argv)
+void	ft_error_print(t_stack **a)
 {
-	int i;
-	t_stack *a;
-	int	j;
-	
-	i = 1;
-	a = NULL;
-	while (i < argc)
-	{
-		j = ft_atoi2(argv[i]);
-		ft_stackadd_back(&a, ft_stack_new(j));
-		i++;
-	}
-	return (a);
-}
-
-int	main(int argc, char **argv)
-{
-	t_stack *a;
-	
-	a = get_stack(argc, argv);
-	if (argc <= 1 || !validate_stack(argc, argv) || !check_repeat(a))
-		ft_error_print(&a);
-	test_print(a);
-	ft_stackclear(&a, ft_free);
+	write(1, "Error\n", 7);
+	ft_stackclear(a, ft_free);
+	exit(EXIT_FAILURE);
 }

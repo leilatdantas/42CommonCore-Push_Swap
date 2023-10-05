@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:54:09 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/04 15:56:15 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:13:09 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,67 +32,21 @@ bool	check_number(char *nbr)
 	return(true);
 }
 
-// bool	check_repeat(t_stack *a)
-// {
-// 	t_stack *tmp;
-// 	bool result;
-
-// 	result = true;
-// 	while(a->next)
-// 	{
-// 		tmp = a;
-// 		while (tmp->next)
-// 		{
-// 			tmp = tmp->next;
-// 			if (tmp->nbr == a->nbr)
-// 			{
-// 				ft_stackclear(&tmp, ft_free);
-// 				return (false);
-// 			}
-// 		}
-// 		a = a->next;
-// 	}
-// 	return (true);
-// }
-
-long *get_nbrs(t_stack *a)
-{
-	long *nbrs;
-	int i;
-
-	i = 0;
-	nbrs = (long *)malloc(sizeof(long) * ft_stack_size(a));
-	while(i < ft_stack_size(a))
-	{
-		nbrs[i] = a->nbr;
-		a = a->next;
-		i++;
-	}
-	return(nbrs);
-}
-
-
 bool	check_repeat(t_stack *a)
 {
-	int i;
-	int j;
-	long *nbrs;
+	t_stack *tmp;
 
-	i = 0;
-	j = 0;
-	nbrs = get_nbrs(a);
-	while(nbrs[i])
+	while(a)
 	{
-		j = i + 1;
-		while (nbrs[j])
+		tmp = a->next;
+		while (tmp)
 		{
-			if (nbrs[i] == nbrs[j])
-				return(false);
-			j++;
+			if (tmp->nbr == a->nbr)
+				return (false);
+			tmp = tmp->next;
 		}
-		i++;
+		a = a->next;
 	}
-	free(nbrs);
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/04 14:52:27 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/04 20:28:27 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_stack_size(t_stack *stack)
 	int	count;
 
 	count = 0;
-	while (stack)
+	while (stack->next)
 	{
 		stack = stack->next;
 		count++;
@@ -91,14 +91,6 @@ void ft_free(void *x)
 	free(x);
 }
 
-void	ft_stackdelone(t_stack *stack, void (*del)(void*))
-{
-	if (!stack || !del)
-		return ;
-	// del(stack->nbr);
-	free(stack);
-}
-
 void	ft_stackclear(t_stack **stack, void (*del)(void*))
 {
 	t_stack	*aux;
@@ -108,7 +100,7 @@ void	ft_stackclear(t_stack **stack, void (*del)(void*))
 	while (*stack)
 	{
 		aux = (*stack)->next;
-		ft_stackdelone(*stack, del);
+		ft_free(*stack);
 		*stack = aux;
 	}
 }
