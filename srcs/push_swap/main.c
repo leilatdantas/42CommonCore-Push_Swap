@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/05 19:18:20 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:53:19 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,34 @@ t_stack *get_stack(int argc, char **argv)
 	return (a);
 }
 
+bool	check_sort(t_stack *a)
+{
+		t_stack *tmp;
+
+	while(a)
+	{
+		tmp = a->next;
+		while (tmp)
+		{
+			if (tmp->nbr < a->nbr)
+				return (false);
+			tmp = tmp->next;
+		}
+		a = a->next;
+	}
+	return (true);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack *a;
 	
 	a = get_stack(argc, argv);
-	if (argc <= 1 || !validate_stack(argc, argv) || !check_repeat(a))
+	if (argc <= 1)
+		exit(1);
+	if (!validate_stack(argc, argv) || !check_repeat(a))
 		ft_error_print(&a);
-	test_print(a);
+	if (!check_sort(a))
+		test_print(a);
 	ft_stackclear(&a, ft_free);
 }

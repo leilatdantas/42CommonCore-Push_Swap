@@ -6,7 +6,7 @@
 #    By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 11:49:39 by lebarbos          #+#    #+#              #
-#    Updated: 2023/10/04 20:18:54 by lebarbos         ###   ########.fr        #
+#    Updated: 2023/10/06 13:31:04 by lebarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,17 +26,15 @@ RM = rm -rf
 AR = ar -rcs
 
 #FLAGS
-CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=address
 LFLAGS	= -L ./libft -lft
 
 #PATHS
 DEPS			= include
 HEADERS			= include/push_swap.h include/libft.h
 SRCS			= srcs/push_swap
-# SRCS_BONUS		= srcs_bonus
 LIBFT_PATH		= libft
 OBJ_PATH		= objs
-# OBJ_PATH_BONUS	= objs_bonus
 
 #FILES
 NAME			= push_swap

@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:54:09 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/05 19:25:12 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/06 17:22:23 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ bool	check_number(char *nbr)
 	{
 		if (!ft_isdigit(nbr[i]) && (nbr[i] != '-' && nbr[i] != '+'))
 			return (false);
-		if ((nbr[i] == '-' || nbr[i] == '+') && i != 0)
-			return (false);
+		if ((nbr[i] == '+' || nbr[i] == '-'))
+		{
+			if (i != 0 || !ft_isdigit(nbr[i+1]))
+				return (false);
+		}
 		i++;
 	}
 	return(true);

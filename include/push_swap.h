@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/04 20:19:34 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:50:39 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	ft_stackdelone(t_stack *stack, void (*del)(void*));
 void	ft_error_print(t_stack **a);
 
 bool	validate_stack(int argc, char **argv);
-
-long	ft_atoi2(char *str);
 
 
 void	test_print(t_stack *a);
