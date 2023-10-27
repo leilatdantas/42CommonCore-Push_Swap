@@ -6,18 +6,18 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/06 13:53:19 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:48:44 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-t_stack *get_stack(int argc, char **argv)
+t_stack	*get_stack(int argc, char **argv)
 {
-	int i;
-	t_stack *a;
-	int	j;
-	
+	int		i;
+	t_stack	*a;
+	int		j;
+
 	i = 1;
 	a = NULL;
 	while (i < argc)
@@ -31,9 +31,9 @@ t_stack *get_stack(int argc, char **argv)
 
 bool	check_sort(t_stack *a)
 {
-		t_stack *tmp;
+	t_stack	*tmp;
 
-	while(a)
+	while (a)
 	{
 		tmp = a->next;
 		while (tmp)
@@ -49,8 +49,8 @@ bool	check_sort(t_stack *a)
 
 int	main(int argc, char **argv)
 {
-	t_stack *a;
-	
+	t_stack	*a;
+
 	a = get_stack(argc, argv);
 	if (argc <= 1)
 		exit(1);

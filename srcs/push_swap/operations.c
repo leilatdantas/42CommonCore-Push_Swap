@@ -6,9 +6,8 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:32:53 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/06 13:33:06 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:50:47 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
-

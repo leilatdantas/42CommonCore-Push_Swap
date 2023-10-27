@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/05 19:17:25 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:50:03 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_stack	*ft_stack_new(long content)
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
-	new->nbr= content;
+	new->nbr = content;
 	new->next = NULL;
 	return (new);
 }
@@ -84,7 +84,7 @@ int	ft_stack_size(t_stack *stack)
 // 	return (result * sign);
 // }
 
-void ft_free(void *x)
+void	ft_free(void *x)
 {
 	if (!x)
 		return ;
@@ -107,12 +107,12 @@ void	ft_stackclear(t_stack **stack, void (*del)(void*))
 
 void	test_print(t_stack *a)
 {
-	t_stack *tmp;
-	
+	t_stack	*tmp;
+
 	tmp = a;
-	while(tmp)
+	while (tmp)
 	{
-		printf("%ld ", tmp->nbr);
+		printf ("%ld ", tmp->nbr);
 		tmp = tmp->next;
 	}
 }

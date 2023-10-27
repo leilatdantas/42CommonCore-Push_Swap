@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/06 13:50:39 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:53:45 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_stack
 	int				index;
 	struct s_stack	*next;
 	struct s_stack	*prev;
-} t_stack;
+}	t_stack;
 
 /*Utils*/
 void	ft_stackadd_back(t_stack **stack, t_stack *new);
@@ -37,7 +37,6 @@ void	ft_stackdelone(t_stack *stack, void (*del)(void*));
 void	ft_error_print(t_stack **a);
 
 bool	validate_stack(int argc, char **argv);
-
 
 void	test_print(t_stack *a);
 
