@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/27 14:48:44 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:27:25 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ int	main(int argc, char **argv)
 	if (!validate_stack(argc, argv) || !check_repeat(a))
 		ft_error_print(&a);
 	if (!check_sort(a))
+	{
 		test_print(a);
+		printf("\n\n");
+		ft_sa(a, 1);
+		test_print(a);
+		ft_ss(a, a);
+		test_print(a);
+	}
 	ft_stackclear(&a, ft_free);
 }
