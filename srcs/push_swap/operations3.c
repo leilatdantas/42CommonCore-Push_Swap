@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations2.c                                      :+:      :+:    :+:   */
+/*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:32:53 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/29 17:27:29 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/29 17:10:08 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void ft_sa(t_stack **a, int print)
 	tmp->next = (*a)->next;
 	(*a)->next = tmp;
 	if(print)
-		write(1, "sa\n", 3);
+		write(1, "sa\n", 4);
 }
 
 void ft_sb(t_stack **b, int print)
@@ -37,6 +37,6 @@ void ft_sb(t_stack **b, int print)
 	tmp->next = (*b)->next;
 	(*b)->next = tmp;
 	if(print)
-		write(1, "sb\n", 3);
+		write(1, "sb\n", 4);
 }
 
