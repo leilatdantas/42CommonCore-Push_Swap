@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/30 09:48:27 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:25:28 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_stackclear(t_stack **stack, void (*del)(void*));
 void	ft_free(void *x);
 void	ft_stackdelone(t_stack *stack, void (*del)(void*));
 void	ft_error_print(t_stack **a);
+bool	check_sort(t_stack *a);
 
 bool	validate_stack(int argc, char **argv);
 void	ft_pa(t_stack **a, t_stack **b, int print);
@@ -48,6 +49,8 @@ void	ft_rr(t_stack **a, t_stack **b, int print);
 void	ft_rra(t_stack **a, int print);
 void	ft_rrb(t_stack **b, int print);
 void	ft_rrr(t_stack **a, t_stack **b, int print);
+
+void	ft_sort(t_stack **a);
 
 void	test_print(t_stack *a);
 

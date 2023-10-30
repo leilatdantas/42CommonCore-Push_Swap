@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/30 09:28:38 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:15:57 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_stack_size(t_stack *stack)
 	int	count;
 
 	count = 0;
-	while (stack->next)
+	while (stack)
 	{
 		stack = stack->next;
 		count++;
