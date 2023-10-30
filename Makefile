@@ -6,7 +6,7 @@
 #    By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 11:49:39 by lebarbos          #+#    #+#              #
-#    Updated: 2023/10/27 16:09:21 by lebarbos         ###   ########.fr        #
+#    Updated: 2023/10/29 18:55:55 by lebarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ OBJ_PATH		= objs
 
 #FILES
 NAME			= push_swap
-SRC_FILES		= main utils validate error operations
+SRC_FILES		= main utils validate error swap rotate reverse_rotate
 OBJS			= $(SRC_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJ_PATH)/, $(OBJS))
 #BONUS

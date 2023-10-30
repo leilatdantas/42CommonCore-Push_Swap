@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/27 16:27:25 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/29 18:56:26 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ int	main(int argc, char **argv)
 	{
 		test_print(a);
 		printf("\n\n");
-		ft_sa(a, 1);
-		test_print(a);
-		ft_ss(a, a);
+		// ft_sa(&a, 1);
+		// test_print(a);
+		// printf("\n");
+		// ft_sb(&a, 1);
+		// test_print(a);
+		ft_rra(&a, 1);
 		test_print(a);
 	}
 	ft_stackclear(&a, ft_free);
