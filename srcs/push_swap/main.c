@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/29 18:56:26 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:09:13 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 		// printf("\n");
 		// ft_sb(&a, 1);
 		// test_print(a);
-		ft_rra(&a, 1);
+		ft_rrr(&a, &a, 1);
 		test_print(a);
 	}
 	ft_stackclear(&a, ft_free);

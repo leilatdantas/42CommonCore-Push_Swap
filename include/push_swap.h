@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/29 18:56:55 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:07:49 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_ss(t_stack **a, t_stack **b, int print);
 void	ft_ra(t_stack **a, int print);
 void	ft_rr(t_stack **a, t_stack **b, int print);
 void	ft_rra(t_stack **a, int print);
+void	ft_rrb(t_stack **b, int print);
+void	ft_rrr(t_stack **a, t_stack **b, int print);
 
 void	test_print(t_stack *a);
 
