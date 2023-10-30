@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/30 09:07:49 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:48:27 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_stack
 
 /*Utils*/
 void	ft_stackadd_back(t_stack **stack, t_stack *new);
+void	ft_stackadd_front(t_stack **stack, t_stack *new);
 t_stack	*ft_stack_last(t_stack *stack);
 t_stack	*ft_stack_new(long content);
 int		ft_stack_size(t_stack *stack);
@@ -37,6 +38,8 @@ void	ft_stackdelone(t_stack *stack, void (*del)(void*));
 void	ft_error_print(t_stack **a);
 
 bool	validate_stack(int argc, char **argv);
+void	ft_pa(t_stack **a, t_stack **b, int print);
+void	ft_pb(t_stack **b, t_stack **a, int print);
 void	ft_sa(t_stack **a, int print);
 void	ft_sb(t_stack **b, int print);
 void	ft_ss(t_stack **a, t_stack **b, int print);

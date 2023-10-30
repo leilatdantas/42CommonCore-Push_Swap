@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/27 14:59:19 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:28:38 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ void	ft_stackadd_back(t_stack **stack, t_stack *new)
 	}
 	last = ft_stack_last(*stack);
 	last->next = new;
+}
+
+void	ft_stackadd_front(t_stack **stack, t_stack *new)
+{
+	if (!new || !stack)
+		return ;
+	if (!*stack)
+	{
+		*stack = new;
+		return ;
+	}
+	new->next = *stack;
+	*stack = new;
 }
 
 int	ft_stack_size(t_stack *stack)

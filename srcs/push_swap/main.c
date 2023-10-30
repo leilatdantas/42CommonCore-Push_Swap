@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/30 09:09:13 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:50:10 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ bool	check_sort(t_stack *a)
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
+	t_stack *b;
 
+	b = NULL;
 	a = get_stack(argc, argv);
 	if (argc <= 1)
 		exit(1);
@@ -65,8 +67,12 @@ int	main(int argc, char **argv)
 		// printf("\n");
 		// ft_sb(&a, 1);
 		// test_print(a);
-		ft_rrr(&a, &a, 1);
+		ft_pb(&a, &b, 1);
 		test_print(a);
+		printf("\n");
+		test_print(b);
+		printf("\n");
 	}
 	ft_stackclear(&a, ft_free);
+	ft_stackclear(&b, ft_free);
 }
