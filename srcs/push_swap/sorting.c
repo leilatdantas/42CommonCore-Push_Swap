@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/01 12:53:46 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:03:02 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	set_index(t_stack *stack)
 	int	median;
 
 	i = 0;
+	if (!stack)
+		return ;
 	median = ft_stack_size(stack) / 2;
 	while (stack)
 	{
@@ -63,48 +65,197 @@ void	set_index(t_stack *stack)
 			stack->above_median = true;
 		else
 			stack->above_median = false;
-		i++;
 		stack = stack->next;
+		i++;
 	}
 }
 
-void	set_target(t_stack *a, t_stack *b)
+t_stack	*ft_find_node(t_stack *stack, long nbr)
+{
+	while (stack)
+	{
+		if (stack->nbr == nbr)
+			return (stack);
+		stack = stack->next;
+	}
+	return (NULL);
+}
+
+//Tentar achar o numero menor que a mais proximo dele. 
+void	set_target_a(t_stack *a, t_stack *b)
 {
 	long best_target;
-	
+	t_stack	*current_b;
+
 	while (a)
 	{
-		
+		best_target = LONG_MIN;
+		current_b = b;
+		a->target = current_b;
+		while (current_b)
+		{
+			if (current_b->nbr < a->nbr && current_b->nbr > best_target)
+			{
+				a->target = current_b;
+				best_target = current_b->nbr;
+			}
+			current_b = current_b->next;
+		}
+		if (best_target == LONG_MIN)
+		{
+			best_target = ft_max(b);
+			a->target = ft_find_node(b, best_target);
+		}
+		a = a->next;
 	}
+}
+
+void	calculate_cost(t_stack *a, t_stack *b)
+{
+	int	size_a;
+	int	size_b;
+
+	size_a = ft_stack_size(a);
+	size_b = ft_stack_size(b);
+	while (a)
+	{
+		a->cost = a->index;
+		if (!a->above_median)
+			a->cost = size_a - a->index;
+		if (!a->target->above_median)
+			a->cost += size_b - a->target->index;
+		else
+			a->cost += a->target->index;
+		a = a->next;
+	}
+}
+
+void	set_min_cost(t_stack *a)
+{
+	t_stack	*cheapest;
+	long	cheapest_value;
+
+	if (!a)
+		return ;
+	cheapest_value = LONG_MAX;
+	while (a)
+	{
+		if(a->cost < cheapest_value)
+		{
+			cheapest_value = a->cost;
+			cheapest = a;
+		}
+		a = a->next;
+	}
+	cheapest->min_cost = true;
 }
 
 void	init_stack(t_stack *a, t_stack *b)
 {
 	set_index(a);
 	set_index(b);
-	set_target(a, b);
+	set_target_a(a, b);
 	calculate_cost(a, b);
 	set_min_cost(a);
+}
+
+t_stack *find_cheapest(t_stack *stack)
+{
+	if (!stack)
+		return (NULL);
+	while (stack)
+	{
+		if (stack->min_cost)
+			return(stack);
+		stack = stack->next;
+	}
+	return (NULL);
+}
+
+void	pre_push(t_stack **stack, t_stack *cheapest, char k)
+{
+	while ((*stack) != cheapest)
+	{
+		if (k == 'a')
+		{
+			if (cheapest->above_median)
+				ft_ra(stack, 1);
+			else if(!cheapest->above_median)
+				ft_rra(stack, 1);
+		}
+		else if (k == 'b')
+		{
+			if (cheapest->above_median)
+				ft_rb(stack, 1);
+			else if (!cheapest->above_median)
+				ft_rrb(stack, 1);
+		}
+	}
+}
+
+void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
+{
+	while (*a != cheapest && (*a)->target != cheapest->target)
+		ft_rr(a, b, 1);
+	set_index(*a);
+	set_index(*b);
+}
+
+void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
+{
+	while (*a != cheapest && (*a)->target != cheapest->target)
+		ft_rrr(a, b, 1);
+	set_index(*a);
+	set_index(*b);
+}
+
+void	ft_move(t_stack **src, t_stack **dst)
+{
+	t_stack	*cheapest;
+	
+	cheapest = find_cheapest(*src);
+	if (cheapest->above_median && cheapest->target->above_median)
+		rotate_both(src, dst, cheapest);
+	if (!cheapest->above_median && !cheapest->target->above_median)
+		rev_rotate_both(src, dst, cheapest);
+	pre_push(src, cheapest, 'a');
+	pre_push(dst, cheapest->target, 'b');
+	ft_pb(src, dst, 1);
 }
 
 void	ft_big_sort(t_stack **a)
 {
 	t_stack *b;
+	t_stack *min;
 
 	b = NULL;
-	ft_pb(&b, a, 1);
-	ft_pb(&b, a, 1);
-	init_stack(*a, b);
-	
+	ft_pb(a, &b, 1);
+	ft_pb(a, &b, 1);
+	while (*a)
+	{
+		init_stack(*a, b);
+		ft_move(a, &b);
+	}
+	while(b)
+		ft_pa(a, &b, 1);
+	set_index(*a);
+	min = ft_find_node(*a, ft_min(*a));
+	while ((*a) != min)
+	{
+		if (min->above_median)
+			ft_ra(a, 1);
+		else
+			ft_rra(a, 1);
+	}
+	ft_stackclear(&b, ft_free);
 }
 
 void	ft_sort(t_stack **a)
 {
-	printf("tamanho da stack: %d\nmenor valor da stack: %lu\n", ft_stack_size(*a), ft_min(*a));
 	if (ft_stack_size(*a) == 2)
 		ft_sa(a, 1);
 	if (ft_stack_size(*a) == 3)
 		ft_sort_three(a);
 	else 
-		ft_big_sort(*a);
+		ft_big_sort(a);
 }

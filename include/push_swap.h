@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/01 11:34:02 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/01 14:33:47 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_stack
 	bool			min_cost;
 	struct s_stack	*target;
 	struct s_stack	*next;
-	struct s_stack	*prev;
+	// struct s_stack	*prev;
 	
 }	t_stack;
 
@@ -51,6 +51,7 @@ void	ft_sa(t_stack **a, int print);
 void	ft_sb(t_stack **b, int print);
 void	ft_ss(t_stack **a, t_stack **b, int print);
 void	ft_ra(t_stack **a, int print);
+void	ft_rb(t_stack **b, int print);
 void	ft_rr(t_stack **a, t_stack **b, int print);
 void	ft_rra(t_stack **a, int print);
 void	ft_rrb(t_stack **b, int print);
