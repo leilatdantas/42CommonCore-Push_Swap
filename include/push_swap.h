@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/30 12:25:28 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:34:02 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 # include "libft.h"
 # include <stdbool.h>
 # include <stdio.h>
+# include <limits.h>
 
 typedef struct s_stack
 {
 	long			nbr;
 	int				index;
+	int				cost;
+	bool			above_median;
+	bool			min_cost;
+	struct s_stack	*target;
 	struct s_stack	*next;
 	struct s_stack	*prev;
+	
 }	t_stack;
 
 /*Utils*/
