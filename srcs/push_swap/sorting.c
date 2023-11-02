@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/01 17:03:02 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:33:09 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_stack	*ft_find_node(t_stack *stack, long nbr)
 	return (NULL);
 }
 
-//Tentar achar o numero menor que a mais proximo dele. 
 void	set_target_a(t_stack *a, t_stack *b)
 {
 	long best_target;
@@ -107,6 +106,34 @@ void	set_target_a(t_stack *a, t_stack *b)
 			a->target = ft_find_node(b, best_target);
 		}
 		a = a->next;
+	}
+}
+
+void	set_target_b(t_stack *b, t_stack *a)
+{
+	long	best_target;
+	t_stack	*current_a;
+
+	while (b)
+	{
+		best_target = LONG_MAX;
+		current_a = a;
+		b->target = current_a;
+		while (current_a)
+		{
+			if (current_a->nbr > b->nbr && current_a->nbr < best_target)
+			{
+				b->target = current_a;
+				best_target = current_a->nbr;
+			}
+			current_a = current_a->next;
+		}
+		if (best_target == LONG_MAX)
+		{
+			best_target = ft_min(a);
+			b->target = ft_find_node(a, best_target);
+		}
+		b = b->next;
 	}
 }
 
@@ -159,6 +186,7 @@ void	init_stack(t_stack *a, t_stack *b)
 	set_min_cost(a);
 }
 
+
 t_stack *find_cheapest(t_stack *stack)
 {
 	if (!stack)
@@ -209,7 +237,7 @@ void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
 	set_index(*b);
 }
 
-void	ft_move(t_stack **src, t_stack **dst)
+void	ft_move_to_b(t_stack **src, t_stack **dst)
 {
 	t_stack	*cheapest;
 	
@@ -223,22 +251,54 @@ void	ft_move(t_stack **src, t_stack **dst)
 	ft_pb(src, dst, 1);
 }
 
+void	ft_move_to_a(t_stack **b, t_stack **a)
+{
+	pre_push(a, (*b)->target, 'a');
+	ft_pa(a, b, 1);
+}
+
+void	init_stack_b(t_stack *b, t_stack *a)
+{
+	set_index(a);
+	set_index(b);
+	set_target_b(b, a);
+}
+
 void	ft_big_sort(t_stack **a)
 {
 	t_stack *b;
-	t_stack *min;
 
 	b = NULL;
-	ft_pb(a, &b, 1);
-	ft_pb(a, &b, 1);
-	while (*a)
+	if (ft_stack_size(*a) > 3)
+		ft_pb(a, &b, 1);
+	if (ft_stack_size(*a) > 3)
+		ft_pb(a, &b, 1);
+	while (ft_stack_size(*a) > 3 && !check_sort(*a))
 	{
 		init_stack(*a, b);
-		ft_move(a, &b);
+		ft_move_to_b(a, &b);
 	}
+	ft_sort_three(a);
 	while(b)
-		ft_pa(a, &b, 1);
+	{
+		init_stack_b(b, *a);
+		ft_move_to_a(&b, a);
+	}
 	set_index(*a);
+	ft_stackclear(&b, ft_free);
+}
+
+void	ft_sort(t_stack **a)
+{
+	t_stack *min;
+
+	min = NULL;
+	if (ft_stack_size(*a) == 2)
+		ft_sa(a, 1);
+	if (ft_stack_size(*a) == 3)
+		ft_sort_three(a);
+	else 
+		ft_big_sort(a);
 	min = ft_find_node(*a, ft_min(*a));
 	while ((*a) != min)
 	{
@@ -247,15 +307,4 @@ void	ft_big_sort(t_stack **a)
 		else
 			ft_rra(a, 1);
 	}
-	ft_stackclear(&b, ft_free);
-}
-
-void	ft_sort(t_stack **a)
-{
-	if (ft_stack_size(*a) == 2)
-		ft_sa(a, 1);
-	if (ft_stack_size(*a) == 3)
-		ft_sort_three(a);
-	else 
-		ft_big_sort(a);
 }
