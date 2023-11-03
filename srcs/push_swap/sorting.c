@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/02 10:33:09 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:20:41 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	set_index(t_stack *stack)
 	while (stack)
 	{
 		stack->index = i;
-		if (i < median)
+		if (i <= median)
 			stack->above_median = true;
 		else
 			stack->above_median = false;
@@ -109,6 +109,7 @@ void	set_target_a(t_stack *a, t_stack *b)
 	}
 }
 
+
 void	set_target_b(t_stack *b, t_stack *a)
 {
 	long	best_target;
@@ -137,6 +138,37 @@ void	set_target_b(t_stack *b, t_stack *a)
 	}
 }
 
+// void	calculate_cost(t_stack *a, t_stack *b)
+// {
+// 	int	size_a;
+// 	int	size_b;
+
+// 	size_a = ft_stack_size(a);
+// 	size_b = ft_stack_size(b);
+// 	while (a)
+// 	{
+// 		a->cost = a->index;
+// 		if (!a->above_median)
+// 			a->cost = size_a - a->index;
+// 		if (a->target->above_median)
+// 		{
+// 			if (a->cost < a->target->index)
+// 				a->cost = a->target->index;
+// 		}
+// 		else
+// 		{
+// 			if (a->above_median)
+// 				a->cost += size_b - a->target->index;
+// 			else
+// 			{
+// 				if (a->cost < (size_b - a->target->index))
+// 					a->cost = size_b - a->target->index;
+// 			}
+// 		}
+// 		a = a->next;
+// 	}
+// }
+
 void	calculate_cost(t_stack *a, t_stack *b)
 {
 	int	size_a;
@@ -156,6 +188,8 @@ void	calculate_cost(t_stack *a, t_stack *b)
 		a = a->next;
 	}
 }
+
+
 
 void	set_min_cost(t_stack *a)
 {
@@ -208,14 +242,14 @@ void	pre_push(t_stack **stack, t_stack *cheapest, char k)
 		{
 			if (cheapest->above_median)
 				ft_ra(stack, 1);
-			else if(!cheapest->above_median)
+			else
 				ft_rra(stack, 1);
 		}
 		else if (k == 'b')
 		{
 			if (cheapest->above_median)
 				ft_rb(stack, 1);
-			else if (!cheapest->above_median)
+			else
 				ft_rrb(stack, 1);
 		}
 	}
@@ -223,7 +257,7 @@ void	pre_push(t_stack **stack, t_stack *cheapest, char k)
 
 void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
 {
-	while (*a != cheapest && (*a)->target != cheapest->target)
+	while (*a != cheapest && (*b) != cheapest->target)
 		ft_rr(a, b, 1);
 	set_index(*a);
 	set_index(*b);
@@ -231,7 +265,7 @@ void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
 
 void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
 {
-	while (*a != cheapest && (*a)->target != cheapest->target)
+	while (*a != cheapest && (*b) != cheapest->target)
 		ft_rrr(a, b, 1);
 	set_index(*a);
 	set_index(*b);
@@ -244,7 +278,7 @@ void	ft_move_to_b(t_stack **src, t_stack **dst)
 	cheapest = find_cheapest(*src);
 	if (cheapest->above_median && cheapest->target->above_median)
 		rotate_both(src, dst, cheapest);
-	if (!cheapest->above_median && !cheapest->target->above_median)
+	else if (!cheapest->above_median && !cheapest->target->above_median)
 		rev_rotate_both(src, dst, cheapest);
 	pre_push(src, cheapest, 'a');
 	pre_push(dst, cheapest->target, 'b');
@@ -266,14 +300,16 @@ void	init_stack_b(t_stack *b, t_stack *a)
 
 void	ft_big_sort(t_stack **a)
 {
-	t_stack *b;
+	t_stack	*b;
+	int		size_a;
 
+	size_a = ft_stack_size(*a);
 	b = NULL;
-	if (ft_stack_size(*a) > 3)
+	if (size_a-- > 3)
 		ft_pb(a, &b, 1);
-	if (ft_stack_size(*a) > 3)
+	if (size_a-- > 3)
 		ft_pb(a, &b, 1);
-	while (ft_stack_size(*a) > 3 && !check_sort(*a))
+	while (size_a-- > 3 && !check_sort(*a))
 	{
 		init_stack(*a, b);
 		ft_move_to_b(a, &b);
@@ -295,7 +331,7 @@ void	ft_sort(t_stack **a)
 	min = NULL;
 	if (ft_stack_size(*a) == 2)
 		ft_sa(a, 1);
-	if (ft_stack_size(*a) == 3)
+	else if (ft_stack_size(*a) == 3)
 		ft_sort_three(a);
 	else 
 		ft_big_sort(a);
