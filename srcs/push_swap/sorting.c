@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/03 15:20:41 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:53:43 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,37 +138,6 @@ void	set_target_b(t_stack *b, t_stack *a)
 	}
 }
 
-// void	calculate_cost(t_stack *a, t_stack *b)
-// {
-// 	int	size_a;
-// 	int	size_b;
-
-// 	size_a = ft_stack_size(a);
-// 	size_b = ft_stack_size(b);
-// 	while (a)
-// 	{
-// 		a->cost = a->index;
-// 		if (!a->above_median)
-// 			a->cost = size_a - a->index;
-// 		if (a->target->above_median)
-// 		{
-// 			if (a->cost < a->target->index)
-// 				a->cost = a->target->index;
-// 		}
-// 		else
-// 		{
-// 			if (a->above_median)
-// 				a->cost += size_b - a->target->index;
-// 			else
-// 			{
-// 				if (a->cost < (size_b - a->target->index))
-// 					a->cost = size_b - a->target->index;
-// 			}
-// 		}
-// 		a = a->next;
-// 	}
-// }
-
 void	calculate_cost(t_stack *a, t_stack *b)
 {
 	int	size_a;
@@ -181,13 +150,44 @@ void	calculate_cost(t_stack *a, t_stack *b)
 		a->cost = a->index;
 		if (!a->above_median)
 			a->cost = size_a - a->index;
-		if (!a->target->above_median)
-			a->cost += size_b - a->target->index;
+		if (a->target->above_median)
+		{
+			if (a->cost < a->target->index)
+				a->cost = a->target->index;
+		}
 		else
-			a->cost += a->target->index;
+		{
+			if (a->above_median)
+				a->cost += size_b - a->target->index;
+			else
+			{
+				if (a->cost < (size_b - a->target->index))
+					a->cost = size_b - a->target->index;
+			}
+		}
 		a = a->next;
 	}
 }
+
+// void	calculate_cost(t_stack *a, t_stack *b)
+// {
+// 	int	size_a;
+// 	int	size_b;
+
+// 	size_a = ft_stack_size(a);
+// 	size_b = ft_stack_size(b);
+// 	while (a)
+// 	{
+// 		a->cost = a->index;
+// 		if (!a->above_median)
+// 			a->cost = size_a - a->index;
+// 		if (!a->target->above_median)
+// 			a->cost += size_b - a->target->index;
+// 		else
+// 			a->cost += a->target->index;
+// 		a = a->next;
+// 	}
+// }
 
 
 
