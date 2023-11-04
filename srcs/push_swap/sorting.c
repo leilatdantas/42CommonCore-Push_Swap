@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/04 12:53:43 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:24:01 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	set_target_a(t_stack *a, t_stack *b)
 	{
 		best_target = LONG_MIN;
 		current_b = b;
-		a->target = current_b;
+		// a->target = current_b;
 		while (current_b)
 		{
 			if (current_b->nbr < a->nbr && current_b->nbr > best_target)
@@ -152,6 +152,8 @@ void	calculate_cost(t_stack *a, t_stack *b)
 			a->cost = size_a - a->index;
 		if (a->target->above_median)
 		{
+			if (!a->above_median)
+				a->cost += a->target->index;
 			if (a->cost < a->target->index)
 				a->cost = a->target->index;
 		}
@@ -302,9 +304,11 @@ void	ft_big_sort(t_stack **a)
 {
 	t_stack	*b;
 	int		size_a;
+	// t_stack	*teste;
 
 	size_a = ft_stack_size(*a);
 	b = NULL;
+	// teste = NULL;
 	if (size_a-- > 3)
 		ft_pb(a, &b, 1);
 	if (size_a-- > 3)
@@ -312,6 +316,8 @@ void	ft_big_sort(t_stack **a)
 	while (size_a-- > 3 && !check_sort(*a))
 	{
 		init_stack(*a, b);
+		// teste = find_cheapest(*a);
+		// printf("Cheapest numero: %lu\nIndice do cheapest: %d\nCusto: %d\n", teste->nbr, teste->index, teste->cost);
 		ft_move_to_b(a, &b);
 	}
 	ft_sort_three(a);
