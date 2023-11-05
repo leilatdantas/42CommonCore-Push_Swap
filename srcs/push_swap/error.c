@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 20:16:27 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/27 14:53:03 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 19:15:26 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error_print(t_stack **a)
 {
-	write(1, "Error\n", 7);
+	write(2, "Error\n", 6);
 	ft_stackclear(a, ft_free);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 12:54:09 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/27 14:52:51 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 19:17:17 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ bool	check_number(char *nbr)
 
 	n = ft_atoi(nbr);
 	i = 0;
+	if (nbr[0] == '\0')
+		return (false);
 	if (n > INT_MAX || n < INT_MIN)
 		return (false);
 	while (nbr[i])
