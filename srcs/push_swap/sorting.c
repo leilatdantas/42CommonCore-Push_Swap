@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 17:24:27 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 20:24:55 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,95 +83,129 @@ t_stack	*ft_find_node(t_stack *stack, long nbr)
 	return (NULL);
 }
 
-void	set_target_a(t_stack *a, t_stack *b)
-{
-	long best_target;
-	t_stack	*current_b;
+// void	set_target_a(t_stack *a, t_stack *b)
+// {
+// 	long best_target;
+// 	t_stack	*current_b;
 
-	while (a)
-	{
-		best_target = LONG_MIN;
-		current_b = b;
-		// a->target = current_b;
-		while (current_b)
-		{
-			if (current_b->nbr < a->nbr && current_b->nbr > best_target)
-			{
-				a->target = current_b;
-				best_target = current_b->nbr;
-			}
-			current_b = current_b->next;
-		}
-		if (best_target == LONG_MIN)
-		{
-			best_target = ft_max(b);
-			a->target = ft_find_node(b, best_target);
-		}
-		a = a->next;
-	}
-}
+// 	while (a)
+// 	{
+// 		best_target = LONG_MIN;
+// 		current_b = b;
+// 		// a->target = current_b;
+// 		while (current_b)
+// 		{
+// 			if (current_b->nbr < a->nbr && current_b->nbr > best_target)
+// 			{
+// 				a->target = current_b;
+// 				best_target = current_b->nbr;
+// 			}
+// 			current_b = current_b->next;
+// 		}
+// 		if (best_target == LONG_MIN)
+// 		{
+// 			best_target = ft_max(b);
+// 			a->target = ft_find_node(b, best_target);
+// 		}
+// 		a = a->next;
+// 	}
+// }
 
 
-void	set_target_b(t_stack *b, t_stack *a)
+void	set_target(t_stack *src, t_stack *dst)
 {
 	long	best_target;
 	t_stack	*current_a;
 
-	while (b)
+	while (src)
 	{
 		best_target = LONG_MAX;
-		current_a = a;
-		// b->target = current_a;
+		current_a = dst;
 		while (current_a)
 		{
-			if (current_a->nbr > b->nbr && current_a->nbr < best_target)
+			if (current_a->nbr > src->nbr && current_a->nbr < best_target)
 			{
-				b->target = current_a;
+				src->target = current_a;
 				best_target = current_a->nbr;
 			}
 			current_a = current_a->next;
 		}
 		if (best_target == LONG_MAX)
 		{
-			best_target = ft_min(a);
-			b->target = ft_find_node(a, best_target);
+			best_target = ft_min(dst);
+			src->target = ft_find_node(dst, best_target);
 		}
-		b = b->next;
+		src = src->next;
 	}
 }
 
-void	calculate_cost(t_stack *src, t_stack *dst)
+void update_cost(t_stack *src, int size_a, int size_b) 
+{
+	src->cost = src->index;
+	if (!src->above_median)
+		src->cost = size_a - src->index;
+	if (src->target->above_median)
+	{
+		if (!src->above_median)
+			src->cost = src->target->index + size_a - src->index;
+		else if (src->cost < src->target->index)
+			src->cost = src->target->index;
+	}
+	else
+	{
+		if (src->above_median)
+			src->cost += size_b - src->target->index;
+		else if (src->cost < (size_b - src->target->index))
+				src->cost = size_b - src->target->index;
+	}
+}
+
+void calculate_cost(t_stack *src, t_stack *dst) 
 {
 	int	size_a;
 	int	size_b;
 
 	size_a = ft_stack_size(src);
 	size_b = ft_stack_size(dst);
-	while (src)
+	while (src) 
 	{
-		src->cost = src->index;
-		if (!src->above_median)
-			src->cost = size_a - src->index;
-		if (src->target->above_median)
-		{
-			if (!src->above_median)
-				src->cost += src->target->index;
-			if (src->cost < src->target->index)
-				src->cost = src->target->index;
-		}
-		else
-		{
-			if (src->above_median)
-				src->cost += size_b - src->target->index;
-			else
-			{
-				if (src->cost < (size_b - src->target->index))
-					src->cost = size_b - src->target->index;
-			}
-		}
+		update_cost(src, size_a, size_b);
 		src = src->next;
 	}
 }
+
+// void	calculate_cost(t_stack *src, t_stack *dst)
+// {
+// 	int	size_a;
+// 	int	size_b;
+
+// 	size_a = ft_stack_size(src);
+// 	size_b = ft_stack_size(dst);
+// 	while (src)
+// 	{
+// 		src->cost = src->index;
+// 		if (!src->above_median)
+// 			src->cost = size_a - src->index;
+// 		if (src->target->above_median)
+// 		{
+// 			if (!src->above_median)
+// 				src->cost += src->target->index;
+// 			if (src->cost < src->target->index)
+// 				src->cost = src->target->index;
+// 		}
+// 		else
+// 		{
+// 			if (src->above_median)
+// 				src->cost += size_b - src->target->index;
+// 			else
+// 			{
+// 				if (src->cost < (size_b - src->target->index))
+// 					src->cost = size_b - src->target->index;
+// 			}
+// 		}
+// 		src = src->next;
+// 	}
+// }
 
 // void	calculate_cost(t_stack *a, t_stack *b)
 // {
@@ -193,8 +227,6 @@ void	calculate_cost(t_stack *src, t_stack *dst)
 // 	}
 // }
 
-
-
 void	set_min_cost(t_stack *stack)
 {
 	t_stack	*cheapest;
@@ -215,14 +247,14 @@ void	set_min_cost(t_stack *stack)
 	cheapest->min_cost = true;
 }
 
-void	init_stack(t_stack *a, t_stack *b)
-{
-	set_index(a);
-	set_index(b);
-	set_target_a(a, b);
-	calculate_cost(a, b);
-	set_min_cost(a);
-}
+// void	init_stack(t_stack *a, t_stack *b)
+// {
+// 	set_index(a);
+// 	set_index(b);
+// 	set_target_a(a, b);
+// 	calculate_cost(a, b);
+// 	set_min_cost(a);
+// }
 
 
 t_stack *find_cheapest(t_stack *stack)
@@ -275,19 +307,19 @@ void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
 	set_index(*b);
 }
 
-void	ft_move_to_b(t_stack **src, t_stack **dst)
-{
-	t_stack	*cheapest;
+// void	ft_move_to_b(t_stack **src, t_stack **dst)
+// {
+// 	t_stack	*cheapest;
 	
-	cheapest = find_cheapest(*src);
-	if (cheapest->above_median && cheapest->target->above_median)
-		rotate_both(src, dst, cheapest);
-	else if (!cheapest->above_median && !cheapest->target->above_median)
-		rev_rotate_both(src, dst, cheapest);
-	pre_push(src, cheapest, 'a');
-	pre_push(dst, cheapest->target, 'b');
-	ft_pb(src, dst, 1);
-}
+// 	cheapest = find_cheapest(*src);
+// 	if (cheapest->above_median && cheapest->target->above_median)
+// 		rotate_both(src, dst, cheapest);
+// 	else if (!cheapest->above_median && !cheapest->target->above_median)
+// 		rev_rotate_both(src, dst, cheapest);
+// 	pre_push(src, cheapest, 'a');
+// 	pre_push(dst, cheapest->target, 'b');
+// 	ft_pb(src, dst, 1);
+// }
 
 void	ft_move_to_a(t_stack **src, t_stack **dst)
 {
@@ -307,18 +339,18 @@ void	init_stack_b(t_stack *b, t_stack *a)
 {
 	set_index(a);
 	set_index(b);
-	set_target_b(b, a);
+	set_target(b, a);
 	calculate_cost(b, a);
 	set_min_cost(b);
 }
 
-void	findMinMax(t_stack *stack, int *min, int *max)
-{
-	*min = ft_min(stack);
-	*max = ft_max(stack);
-}
+// void	findMinMax(t_stack *stack, int *min, int *max)
+// {
+// 	*min = ft_min(stack);
+// 	*max = ft_max(stack);
+// }
 
-int checkBellowTarget(t_stack *a, int target)
+int check_bellow_target(t_stack *a, int target)
 {
 	int result;
 
@@ -332,51 +364,32 @@ int checkBellowTarget(t_stack *a, int target)
 	return (result);
 }
 
-void	move_smallest(t_stack **a, t_stack **b)
+void	ft_move_to_b(t_stack **a, t_stack **b)
 {
-    int remaining = ft_stack_size(*a);
-    // int groupSize = remaining/2; // Tamanho inicial do grupo
-    int min, max;
+    int		remaining;
+    long	min;
+	long	max;
+	int		target;
+	int		pb_needed;
 
-    while (remaining > 3) {
-        findMinMax(*a, &min, &max);
-        int target = min + ((max - min) / 2); // Cálculo do valor alvo inicial
-		int pb_needed = checkBellowTarget(*a, target);
-		
+	remaining = ft_stack_size(*a);
+    while (remaining > 3) 
+	{
+        min = ft_min(*a);
+		max = ft_max(*a);
+        target = min + ((max - min) / 2);
+		pb_needed = check_bellow_target(*a, target);
         while (remaining > 3 && (pb_needed > 0))
 		{
-            // int moved = 0;
-            // int targetUpdated = 0; // Flag para controlar a atualização do valor alvo
-			while (pb_needed > 0 && remaining > 3)
-            {
-				// while (iterations < remaining && remaining > 3)
-				// {
-                	if ((*a)->nbr < target) 
-					{
-                   		ft_pb(a, b, 1);
-                    	// moved++;
-                    	remaining--;
-						pb_needed--;
-                	} else {
-                    	ft_ra(a, 1);
-                	}
-           		// }
-			}
-
-            // findMinMax(*a, &min, &max); // Atualização dos valores mínimo e máximo
-            // // Verificar se há números abaixo do target para atualização do target
-            // if (*a != NULL && (*a)->nbr >= target) 
-			// {
-                target = min + (max - min) / 2;
-                // targetUpdated = 1;
-            // }
-
-            // // Atualizar o valor alvo sem modificar o tamanho do grupo
-            // if (!targetUpdated && (*a) != NULL && (*a)->nbr < target && checkBellowTarget(*a, target)) 
-			// {
-            //     target = min + (max - min) / 2;
-            // }
-        }
+			if ((*a)->nbr < target) 
+			{
+            	ft_pb(a, b, 1);
+             	remaining--;
+				pb_needed--;
+            } 
+			else 
+                ft_ra(a, 1);
+		}
     }
 }
 
@@ -384,7 +397,6 @@ void	ft_big_sort(t_stack **a)
 {
 	t_stack	*b;
 	int		size_a;
-	// t_stack *teste;
 
 	size_a = ft_stack_size(*a);
 	b = NULL;
@@ -393,19 +405,11 @@ void	ft_big_sort(t_stack **a)
 	if (size_a-- > 3 && !check_sort(*a))
 		ft_pb(a, &b, 1);
 	if (size_a > 3 && !check_sort(*a))
-	{
-		move_smallest(a, &b);
-		// init_stack(*a, b);
-		// ft_move_to_b(a, &b);
-	}
+		ft_move_to_b(a, &b);
 	ft_sort_three(a);
-	// if (!check_sort(*a))
-	// 	ft_sa(a, 1);
 	while(b)
 	{
 		init_stack_b(b, *a);
-		// teste = find_cheapest(b);
-		// printf("Cheapest numero: %lu\nIndice do cheapest: %d\nCusto: %d\n", teste->nbr, teste->index, teste->cost);
 		ft_move_to_a(&b, a);
 	}
 	set_index(*a);
