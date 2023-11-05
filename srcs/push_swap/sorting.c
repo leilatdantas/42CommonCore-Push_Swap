@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 16:01:25 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 17:24:27 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,46 +318,64 @@ void	findMinMax(t_stack *stack, int *min, int *max)
 	*max = ft_max(stack);
 }
 
+int checkBellowTarget(t_stack *a, int target)
+{
+	int result;
+
+	result = 0;
+	while (a)
+	{
+		if (a->nbr < target)
+			result++;
+		a = a->next;
+	}
+	return (result);
+}
+
 void	move_smallest(t_stack **a, t_stack **b)
 {
     int remaining = ft_stack_size(*a);
-    int groupSize = remaining/2; // Tamanho inicial do grupo
+    // int groupSize = remaining/2; // Tamanho inicial do grupo
     int min, max;
 
     while (remaining > 3) {
         findMinMax(*a, &min, &max);
         int target = min + ((max - min) / 2); // Cálculo do valor alvo inicial
-
-        while (remaining > 3) 
+		int pb_needed = checkBellowTarget(*a, target);
+		
+        while (remaining > 3 && (pb_needed > 0))
 		{
-            int moved = 0;
-            int targetUpdated = 0; // Flag para controlar a atualização do valor alvo
-			int iterations = 0;
-            while (moved < groupSize && iterations < remaining && remaining > 3)
-			{
-                if ((*a)->nbr < target) 
-				{
-                    ft_pb(a, b, 1);
-                    moved++;
-                    remaining--;
-                } else {
-                    ft_ra(a, 1);
-                }
-				iterations++;
-            }
+            // int moved = 0;
+            // int targetUpdated = 0; // Flag para controlar a atualização do valor alvo
+			while (pb_needed > 0 && remaining > 3)
+            {
+				// while (iterations < remaining && remaining > 3)
+				// {
+                	if ((*a)->nbr < target) 
+					{
+                   		ft_pb(a, b, 1);
+                    	// moved++;
+                    	remaining--;
+						pb_needed--;
+                	} else {
+                    	ft_ra(a, 1);
+                	}
+           		// }
+			}
 
-            findMinMax(*a, &min, &max); // Atualização dos valores mínimo e máximo
-            // Verificar se há números abaixo do target para atualização do target
-            if (*a != NULL && (*a)->nbr >= target) 
-			{
+            // findMinMax(*a, &min, &max); // Atualização dos valores mínimo e máximo
+            // // Verificar se há números abaixo do target para atualização do target
+            // if (*a != NULL && (*a)->nbr >= target) 
+			// {
                 target = min + (max - min) / 2;
-                targetUpdated = 1;
-            }
+                // targetUpdated = 1;
+            // }
 
-            // Atualizar o valor alvo sem modificar o tamanho do grupo
-            if (!targetUpdated && (*a) != NULL && (*a)->nbr < target) {
-                target = min + (max - min) / 2;
-            }
+            // // Atualizar o valor alvo sem modificar o tamanho do grupo
+            // if (!targetUpdated && (*a) != NULL && (*a)->nbr < target && checkBellowTarget(*a, target)) 
+			// {
+            //     target = min + (max - min) / 2;
+            // }
         }
     }
 }
