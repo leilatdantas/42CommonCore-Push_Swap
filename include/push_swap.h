@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/01 14:33:47 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:04:48 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef struct s_stack
 	bool			min_cost;
 	struct s_stack	*target;
 	struct s_stack	*next;
-	// struct s_stack	*prev;
-	
 }	t_stack;
 
 /*Utils*/

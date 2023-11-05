@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:27:58 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 20:28:45 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 21:05:30 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@
 // void	ft_move_to_b(t_stack **src, t_stack **dst)
 // {
 // 	t_stack	*cheapest;
-	
+
 // 	cheapest = find_cheapest(*src);
 // 	if (cheapest->above_median && cheapest->target->above_median)
 // 		rotate_both(src, dst, cheapest);

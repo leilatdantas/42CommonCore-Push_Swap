@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:22:43 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 19:22:32 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 20:48:26 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_stack	*get_stack(int argc, char **argv)
 	}
 	return (a);
 }
-
 
 bool	check_sort(t_stack *a)
 {

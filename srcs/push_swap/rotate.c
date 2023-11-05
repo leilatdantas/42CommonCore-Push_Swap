@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 17:34:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/29 18:57:18 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 20:50:19 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_ra(t_stack **a, int print)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!(*a) || !(*a)->next)
 		return ;
@@ -29,7 +29,7 @@ void	ft_ra(t_stack **a, int print)
 
 void	ft_rb(t_stack **b, int print)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!(*b) || !(*b)->next)
 		return ;

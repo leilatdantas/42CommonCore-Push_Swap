@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:45:35 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/10/30 09:08:56 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 20:49:57 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_rra(t_stack **a, int print)
 {
-	t_stack *tmp;
-	t_stack *penult;
+	t_stack	*tmp;
+	t_stack	*penult;
 
 	if (!(*a) || !(*a)->next)
 		return ;
 	tmp = *a;
 	*a = ft_stack_last(*a);
 	(*a)->next = tmp;
-	while(tmp != *a)
+	while (tmp != *a)
 	{
 		penult = tmp;
 		tmp = tmp->next;
@@ -34,15 +34,15 @@ void	ft_rra(t_stack **a, int print)
 
 void	ft_rrb(t_stack **b, int print)
 {
-	t_stack *tmp;
-	t_stack *penult;
+	t_stack	*tmp;
+	t_stack	*penult;
 
 	if (!(*b) || !(*b)->next)
 		return ;
 	tmp = *b;
 	*b = ft_stack_last(*b);
 	(*b)->next = tmp;
-	while(tmp != *b)
+	while (tmp != *b)
 	{
 		penult = tmp;
 		tmp = tmp->next;
