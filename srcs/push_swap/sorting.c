@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 13:48:16 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/05 16:01:25 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	set_target_b(t_stack *b, t_stack *a)
 	{
 		best_target = LONG_MAX;
 		current_a = a;
-		b->target = current_a;
+		// b->target = current_a;
 		while (current_a)
 		{
 			if (current_a->nbr > b->nbr && current_a->nbr < best_target)
@@ -195,22 +195,22 @@ void	calculate_cost(t_stack *src, t_stack *dst)
 
 
 
-void	set_min_cost(t_stack *a)
+void	set_min_cost(t_stack *stack)
 {
 	t_stack	*cheapest;
 	long	cheapest_value;
 
-	if (!a)
+	if (!stack)
 		return ;
 	cheapest_value = LONG_MAX;
-	while (a)
+	while (stack)
 	{
-		if(a->cost < cheapest_value)
+		if(stack->cost < cheapest_value)
 		{
-			cheapest_value = a->cost;
-			cheapest = a;
+			cheapest_value = stack->cost;
+			cheapest = stack;
 		}
-		a = a->next;
+		stack = stack->next;
 	}
 	cheapest->min_cost = true;
 }
@@ -300,7 +300,7 @@ void	ft_move_to_a(t_stack **src, t_stack **dst)
 		rev_rotate_both(src, dst, cheapest);
 	pre_push(src, cheapest, 'b');
 	pre_push(dst, cheapest->target, 'a');
-	ft_pa(src, dst, 1);
+	ft_pa(dst, src, 1);
 }
 
 void	init_stack_b(t_stack *b, t_stack *a)
@@ -366,6 +366,7 @@ void	ft_big_sort(t_stack **a)
 {
 	t_stack	*b;
 	int		size_a;
+	// t_stack *teste;
 
 	size_a = ft_stack_size(*a);
 	b = NULL;
@@ -385,6 +386,8 @@ void	ft_big_sort(t_stack **a)
 	while(b)
 	{
 		init_stack_b(b, *a);
+		// teste = find_cheapest(b);
+		// printf("Cheapest numero: %lu\nIndice do cheapest: %d\nCusto: %d\n", teste->nbr, teste->index, teste->cost);
 		ft_move_to_a(&b, a);
 	}
 	set_index(*a);
