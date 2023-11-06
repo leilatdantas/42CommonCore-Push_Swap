@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:20:37 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 20:05:17 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:58:46 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,37 @@ void	ft_checker(t_stack **a, char *line)
 	free(line);
 }
 
+t_stack	*get_stack_ch(int argc, char **argv)
+{
+	int		i;
+	t_stack	*a;
+	int		j;
+
+	i = 1;
+	a = NULL;
+	if (argc == 2)
+		ft_error_print();
+	while (i < argc)
+	{
+		j = ft_atoi(argv[i]);
+		ft_stackadd_back(&a, ft_stack_new(j));
+		i++;
+	}
+	return (a);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	char	*line;
 
 	if (!validate_stack(argc, argv))
-		ft_checker_error();
-	a = get_stack(argc, argv);
+		ft_error_print();
+	a = get_stack_ch(argc, argv);
+	if (argc <= 1)
+		exit(1);
 	if (!check_repeat(a))
-		ft_checker_error();
+		ft_error_print();
 	line = get_next_line(0);
 	if (!line && !check_sort(a))
 		write(1, "KO\n", 3);

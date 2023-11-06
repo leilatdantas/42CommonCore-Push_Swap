@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 16:21:11 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:47:12 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,19 @@ t_stack	*process_quote(char **argv)
 
 t_stack	*get_stack(int argc, char **argv)
 {
-	t_stack	*a;
 	int		i;
+	t_stack	*a;
 	int		j;
 
 	i = 1;
 	a = NULL;
-	if (argc < 2)
-		exit(EXIT_FAILURE);
 	if (argc == 2)
-		a = process_quote(argv);
-	else
+		exit(EXIT_SUCCESS);
+	while (i < argc)
 	{
-		while (i < argc)
-		{
-			j = ft_atoi(argv[i]);
-			ft_stackadd_back(&a, ft_stack_new(j));
-			i++;
-		}
+		j = ft_atoi(argv[i]);
+		ft_stackadd_back(&a, ft_stack_new(j));
+		i++;
 	}
 	return (a);
 }
