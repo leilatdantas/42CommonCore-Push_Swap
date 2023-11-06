@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:20:37 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 19:33:01 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:05:17 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_checker(t_stack **a, char *line)
 	while (line && *line != '\n')
 	{
 		tmp = line;
-		// printf(tmp);
 		line = ft_check(a, &b, line);
 		free(tmp);
 	}
