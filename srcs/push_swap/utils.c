@@ -6,11 +6,53 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 13:16:44 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:15:05 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+long	ft_atoi_mod(const char *str)
+{
+	long	result;
+	int		sign;
+
+	result = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if ((*str == '+' || *str == '-'))
+	{
+		if (*str == '-')
+			sign = sign * (-1);
+		str++;
+	}
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			ft_error_print();
+		result = result * 10 + (*str - 48);
+		str++;
+	}
+	if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
+		ft_error_print();
+	return (result * sign);
+}
+
+void	ft_free_array(char	**array)
+{
+	char	*tmp;
+
+	if (!array)
+		return ;
+	while (*array)
+	{
+		tmp = *array;
+		array++;
+		free(tmp);
+	}
+	*array = NULL;
+}
 
 t_stack *process_quote(char **argv)
 {
@@ -21,13 +63,14 @@ t_stack *process_quote(char **argv)
 
 	a = NULL;
 	i = 0;
-	tmp = ft_split(argv[1], ' ');
+	tmp = ft_split(argv[1], 32);
 	while (tmp[i])
 	{
 		j = ft_atoi(tmp[i]);
 		ft_stackadd_back(&a, ft_stack_new(j));
 		i++;
 	}
+	ft_free_array(tmp);
 	ft_free(tmp);
 	return(a);
 }
@@ -48,7 +91,7 @@ t_stack	*get_stack(int argc, char **argv)
 	{
 		while (i < argc)
 		{
-			j = ft_atoi(argv[i]);
+			j = ft_atoi_mod(argv[i]);
 			ft_stackadd_back(&a, ft_stack_new(j));
 			i++;
 		}

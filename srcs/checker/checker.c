@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:20:37 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 12:35:17 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:24:16 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_checker_error(void)
 {
-	write(1, "Error\n", 6);
+	write(1, "Error1\n", 7);
 	exit(EXIT_FAILURE);
 }
 
@@ -80,11 +80,11 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	char	*line;
 
+	if (!validate_stack(argc, argv))
+		ft_check_error();
 	a = get_stack(argc, argv);
-	if (argc <= 1)
-		exit(EXIT_FAILURE);
-	if (!validate_stack(argc, argv) || !check_repeat(a))
-		ft_error_print();
+	if (!check_repeat(a))
+		ft_checker_error();
 	line = get_next_line(0);
 	if (!line && !check_sort(a))
 		write(1, "KO\n", 3);

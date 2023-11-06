@@ -6,7 +6,7 @@
 #    By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 11:49:39 by lebarbos          #+#    #+#              #
-#    Updated: 2023/11/06 12:22:06 by lebarbos         ###   ########.fr        #
+#    Updated: 2023/11/06 15:05:51 by lebarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ TARGET_BONUS	= $(addprefix $(OBJ_PATH_BONUS)/, $(OBJS_BONUS))
 #RULES 
 all: $(NAME)
 
-$(NAME): $(OBJ_PATH) $(TARGET) $(HEADERS)
+$(NAME): $(OBJ_PATH) $(TARGET) $(HEADERS) srcs/push_swap/main.c
 	# echo "$(MAGENTA)Compiling:$(RESET) $(GREEN)libft/*$(RESET)"
 	make -C $(LIBFT_PATH)
 	
@@ -69,7 +69,7 @@ $(OBJ_PATH) :
 
 bonus : $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJ_PATH_BONUS) $(TARGET_BONUS) $(NAME)
+$(NAME_BONUS): $(OBJ_PATH_BONUS) $(TARGET_BONUS) $(NAME) srcs/checker/checker.c
 	
 	echo "$(CYAN)🔗 Linking: $(RESET) $(CFLAGS) $(GREEN)*$(RESET)"
 	$(CC) $(CFLAGS) $(TARGET_BONUS) $(TARGET) $(LFLAGS) -o $(NAME_BONUS) -I$(DEPS)
