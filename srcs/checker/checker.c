@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:20:37 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 15:44:06 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 19:33:01 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_checker_error(void)
 {
-	write(1, "Error1\n", 7);
+	write(1, "Error\n", 7);
 	exit(EXIT_FAILURE);
 }
 
@@ -31,7 +31,7 @@ void	ft_check2(t_stack **a, t_stack **b, char *line)
 char	*ft_check(t_stack **a, t_stack **b, char *line)
 {
 	if (line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
-		ft_pa(a, b, 1);
+		ft_pa(a, b, 0);
 	else if (line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
 		ft_pb(a, b, 0);
 	else if (line[0] == 's' && line[1] == 'a' && line[2] == '\n')
@@ -62,7 +62,7 @@ void	ft_checker(t_stack **a, char *line)
 	while (line && *line != '\n')
 	{
 		tmp = line;
-		printf(tmp);
+		// printf(tmp);
 		line = ft_check(a, &b, line);
 		free(tmp);
 	}
@@ -81,7 +81,7 @@ int	main(int argc, char **argv)
 	char	*line;
 
 	if (!validate_stack(argc, argv))
-		ft_check_error();
+		ft_checker_error();
 	a = get_stack(argc, argv);
 	if (!check_repeat(a))
 		ft_checker_error();
