@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   stack_aux2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 20:16:27 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 15:53:03 by lebarbos         ###   ########.fr       */
+/*   Created: 2023/11/06 15:53:48 by lebarbos          #+#    #+#             */
+/*   Updated: 2023/11/06 16:21:22 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	ft_free(void *x)
+void	ft_stackclear(t_stack **stack, void (*del)(void*))
 {
-	if (!x)
-		return ;
-	free(x);
-}
+	t_stack	*aux;
 
-void	ft_free_array(char	**array)
-{
-	char	*tmp;
-
-	if (!array)
+	if (!*stack || !del)
 		return ;
-	while (*array)
+	while (*stack)
 	{
-		tmp = *array;
-		array++;
-		free(tmp);
+		aux = (*stack)->next;
+		ft_free(*stack);
+		*stack = aux;
 	}
-	*array = NULL;
 }
 
-void	ft_error_print(void)
+t_stack	*ft_find_node(t_stack *stack, long nbr)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
+	while (stack)
+	{
+		if (stack->nbr == nbr)
+			return (stack);
+		stack = stack->next;
+	}
+	return (NULL);
 }

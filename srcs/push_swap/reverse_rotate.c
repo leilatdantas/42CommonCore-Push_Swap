@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 18:45:35 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 20:49:57 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:11:42 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,12 @@ void	ft_rrr(t_stack **a, t_stack **b, int print)
 	ft_rrb(b, 0);
 	if (print)
 		write(1, "rrr\n", 4);
+}
+
+void	rev_rotate_both(t_stack **a, t_stack **b, t_stack *cheapest)
+{
+	while (*a != cheapest && (*b) != cheapest->target)
+		ft_rrr(a, b, 1);
+	set_index(*a);
+	set_index(*b);
 }
