@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 20:37:58 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 09:37:46 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ void	set_min_cost(t_stack *stack)
 			cheapest_value = stack->cost;
 			cheapest = stack;
 		}
+		else
+			stack->min_cost = false;
 		stack = stack->next;
 	}
 	cheapest->min_cost = true;
@@ -172,6 +174,8 @@ t_stack	*find_cheapest(t_stack *stack)
 	{
 		if (stack->min_cost)
 			return (stack);
+		else
+			stack->min_cost = false;
 		stack = stack->next;
 	}
 	return (NULL);
