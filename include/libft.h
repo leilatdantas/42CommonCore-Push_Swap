@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:46:53 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/01 11:30:58 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:20:21 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+
+# endif
 
 typedef struct s_list
 {
@@ -54,7 +59,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 **  Parte 2 - Additional functions
 */
 char	*ft_substr(char const *s, unsigned int star, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
@@ -64,6 +69,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+char	*get_next_line(int fd);
 
 /*
 ** Parte BONUS
@@ -77,5 +83,9 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 int		ft_lstsize(t_list *lst);
+
+char	*ft_strchr_mod(const char *str, int c);
+size_t	ft_strlen_mod(const char *str);
+char	*ft_strjoin_mod(char *s1, char const *s2);
 
 #endif

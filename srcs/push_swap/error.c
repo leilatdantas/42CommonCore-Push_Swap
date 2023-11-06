@@ -6,15 +6,14 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 20:16:27 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 19:15:26 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:26:43 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	ft_error_print(t_stack **a)
+void	ft_error_print(void)
 {
 	write(2, "Error\n", 6);
-	ft_stackclear(a, ft_free);
 	exit(EXIT_FAILURE);
 }

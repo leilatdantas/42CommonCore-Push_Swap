@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 11:45:02 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 12:13:49 by lebarbos         ###   ########.fr       */
+/*   Created: 2023/05/27 13:44:44 by lebarbos          #+#    #+#             */
+/*   Updated: 2023/11/06 12:19:30 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*	
-DEF: Allocates (with malloc) and returns a new string, which is the result of the
-concatenation of s1 and s2.
-RETURN VALUE: The new string. NULL if the allocation fails. 
-*/
-
 #include "libft.h"
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strchr_mod(const char *str, int c)
+{
+	size_t	i;
+
+	i = 0;
+	if (str == NULL)
+		return (NULL);
+	while ((unsigned char)str[i] != (unsigned char)c && str[i])
+		i++;
+	if ((unsigned char)c == (unsigned char)str[i])
+		return ((char *)(str + i));
+	return (NULL);
+}
+
+size_t	ft_strlen_mod(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin_mod(char *s1, char const *s2)
 {
 	char	*new_string;
 	size_t	i;
@@ -29,7 +47,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 		s1 = malloc(sizeof(char) * 1);
 		s1[0] = '\0';
 	}
-	new_string = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)
+	new_string = malloc(sizeof(char) * (ft_strlen_mod(s1) + ft_strlen_mod(s2)
 				+ 1));
 	if (!new_string)
 		return (NULL);

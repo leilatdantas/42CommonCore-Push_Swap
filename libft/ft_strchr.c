@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:49:36 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/05/01 20:24:25 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:00:36 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ is not found.
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *str, int c)
 {
-	unsigned int	i;
-	unsigned char	a;
+	size_t	i;
 
-	a = c;
 	i = 0;
-	while (s[i] != a && s[i])
+	if (str == NULL)
+		return (NULL);
+	while ((unsigned char)str[i] != (unsigned char)c && str[i])
 		i++;
-	if (a == s[i])
-		return ((char *)(s + i));
+	if ((unsigned char)c == (unsigned char)str[i])
+		return ((char *)(str + i));
 	return (NULL);
 }

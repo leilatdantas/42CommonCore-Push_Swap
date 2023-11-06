@@ -6,11 +6,73 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/04 16:41:19 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:16:44 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_stack *process_quote(char **argv)
+{
+	t_stack	*a;
+	char	**tmp;
+	int		i;
+	int		j;
+
+	a = NULL;
+	i = 0;
+	tmp = ft_split(argv[1], ' ');
+	while (tmp[i])
+	{
+		j = ft_atoi(tmp[i]);
+		ft_stackadd_back(&a, ft_stack_new(j));
+		i++;
+	}
+	ft_free(tmp);
+	return(a);
+}
+
+t_stack	*get_stack(int argc, char **argv)
+{
+	t_stack	*a;
+	int		i;
+	int		j;
+
+	i = 1;
+	a = NULL;
+	if (argc < 2)
+		exit(EXIT_FAILURE);
+	if (argc == 2)
+		a = process_quote(argv);
+	else
+	{
+		while (i < argc)
+		{
+			j = ft_atoi(argv[i]);
+			ft_stackadd_back(&a, ft_stack_new(j));
+			i++;
+		}
+	}
+	return (a);
+}
+
+bool	check_sort(t_stack *a)
+{
+	t_stack	*tmp;
+
+	while (a)
+	{
+		tmp = a->next;
+		while (tmp)
+		{
+			if (tmp->nbr < a->nbr)
+				return (false);
+			tmp = tmp->next;
+		}
+		a = a->next;
+	}
+	return (true);
+}
 
 t_stack	*ft_stack_new(long content)
 {

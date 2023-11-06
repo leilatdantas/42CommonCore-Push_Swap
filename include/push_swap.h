@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/05 21:04:48 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:16:16 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_stack
 }	t_stack;
 
 /*Utils*/
+bool	check_sort(t_stack *a);
+t_stack	*get_stack(int argc, char **argv);
 void	ft_stackadd_back(t_stack **stack, t_stack *new);
 void	ft_stackadd_front(t_stack **stack, t_stack *new);
 t_stack	*ft_stack_last(t_stack *stack);
@@ -39,7 +41,7 @@ bool	check_repeat(t_stack *a);
 void	ft_stackclear(t_stack **stack, void (*del)(void*));
 void	ft_free(void *x);
 void	ft_stackdelone(t_stack *stack, void (*del)(void*));
-void	ft_error_print(t_stack **a);
+void	ft_error_print(void);
 bool	check_sort(t_stack *a);
 
 bool	validate_stack(int argc, char **argv);

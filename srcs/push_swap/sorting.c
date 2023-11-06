@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:03:29 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 09:37:46 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/06 10:20:08 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	update_cost(t_stack *src, int size_src, int size_dst)
 		if (src->above_median)
 			src->cost += size_dst - src->target->index;
 		else if (src->cost < (size_dst - src->target->index))
-				src->cost = size_dst - src->target->index;
+			src->cost = size_dst - src->target->index;
 	}
 }
 

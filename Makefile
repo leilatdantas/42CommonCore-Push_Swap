@@ -6,7 +6,7 @@
 #    By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 11:49:39 by lebarbos          #+#    #+#              #
-#    Updated: 2023/11/06 09:37:05 by lebarbos         ###   ########.fr        #
+#    Updated: 2023/11/06 12:22:06 by lebarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,15 +35,16 @@ HEADERS			= include/push_swap.h include/libft.h
 SRCS			= srcs/push_swap
 LIBFT_PATH		= libft
 OBJ_PATH		= objs
+OBJ_PATH_BONUS	= objs_checker
 
 #FILES
 NAME			= push_swap
-SRC_FILES		= main utils validate error swap rotate reverse_rotate push sorting
+SRC_FILES		= utils validate error swap rotate reverse_rotate push sorting
 OBJS			= $(SRC_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJ_PATH)/, $(OBJS))
 #BONUS
 NAME_BONUS		= checker
-SRC_FILES_BONUS = srcs/checker
+SRC_FILES_BONUS = checker
 OBJS_BONUS		= $(SRC_FILES_BONUS:%=%.o)
 TARGET_BONUS	= $(addprefix $(OBJ_PATH_BONUS)/, $(OBJS_BONUS))
 
@@ -55,7 +56,7 @@ $(NAME): $(OBJ_PATH) $(TARGET) $(HEADERS)
 	make -C $(LIBFT_PATH)
 	
 	echo "$(CYAN)🔗 Compiling: $(RESET) $(CFLAGS) $(GREEN)*$(NAME)$(RESET)"
-	$(CC) $(CFLAGS) $(TARGET) $(LFLAGS) -o $(NAME) -I$(DEPS)
+	$(CC) $(CFLAGS) $(TARGET) srcs/push_swap/main.c  $(LFLAGS) -o $(NAME) -I$(DEPS)
 	
 	echo "$(GREEN)🎉 YAY! Compilation is done!$(RESET)"
 	
@@ -66,21 +67,21 @@ $(OBJ_PATH)/%.o : $(SRCS)/%.c
 $(OBJ_PATH) :
 	mkdir -p $(OBJ_PATH)
 
-# bonus : $(NAME_BONUS)
+bonus : $(NAME_BONUS)
 
-# $(NAME_BONUS): $(OBJ_PATH_BONUS) $(TARGET_BONUS)
+$(NAME_BONUS): $(OBJ_PATH_BONUS) $(TARGET_BONUS) $(NAME)
 	
-# 	echo "$(CYAN)🔗 Linking: $(RESET) $(CFLAGS) $(GREEN)*$(RESET)"
-# 	$(CC) $(CFLAGS) main_bonus.c  $(TARGET_BONUS) $(LFLAGS) -o $(NAME_BONUS) -I$(DEPS)
+	echo "$(CYAN)🔗 Linking: $(RESET) $(CFLAGS) $(GREEN)*$(RESET)"
+	$(CC) $(CFLAGS) $(TARGET_BONUS) $(TARGET) $(LFLAGS) -o $(NAME_BONUS) -I$(DEPS)
 	
-# 	echo "$(GREEN)🎉 YAY! BONUS is done!$(RESET)"
+	echo "$(GREEN)🎉 YAY! BONUS is done!$(RESET)"
 	
-# $(OBJ_PATH_BONUS)/%.o : $(SRCS_BONUS)/%.c 
-# 	echo "$(MAGENTA)🤔 Compiling BONUS:$(RESET) $(CFLAGS) $(GREEN)$<$(RESET)"
-# 	$(CC) $(CFLAGS) -c $^ -o $@ -I $(DEPS)
+$(OBJ_PATH_BONUS)/%.o : $(SRCS_BONUS)/%.c 
+	echo "$(MAGENTA)🤔 Compiling BONUS:$(RESET) $(CFLAGS) $(GREEN)$<$(RESET)"
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(DEPS)
 
-# $(OBJ_PATH_BONUS) :
-# 	mkdir -p $(OBJ_PATH_BONUS)
+$(OBJ_PATH_BONUS) :
+	mkdir -p $(OBJ_PATH_BONUS)
 
 clean:
 	make clean -C $(LIBFT_PATH)
