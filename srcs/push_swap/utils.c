@@ -6,32 +6,12 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:32 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 21:47:12 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:31:13 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*process_quote(char **argv)
-{
-	t_stack	*a;
-	char	**tmp;
-	int		i;
-	int		j;
-
-	a = NULL;
-	i = 0;
-	tmp = ft_split(argv[1], 32);
-	while (tmp[i])
-	{
-		j = ft_atoi(tmp[i]);
-		ft_stackadd_back(&a, ft_stack_new(j));
-		i++;
-	}
-	ft_free_array(tmp);
-	ft_free(tmp);
-	return (a);
-}
 
 t_stack	*get_stack(int argc, char **argv)
 {
@@ -50,4 +30,57 @@ t_stack	*get_stack(int argc, char **argv)
 		i++;
 	}
 	return (a);
+}
+
+long	ft_min(t_stack *a)
+{
+	long	min;
+
+	min = a->nbr;
+	while (a->next)
+	{
+		if (a->next->nbr < min)
+			min = a->next->nbr;
+		a = a->next;
+	}
+	return (min);
+}
+
+long	ft_max(t_stack *a)
+{
+	long	max;
+
+	max = a->nbr;
+	while (a->next)
+	{
+		if (a->next->nbr > max)
+			max = a->next->nbr;
+		a = a->next;
+	}
+	return (max);
+}
+
+void	ft_stackclear(t_stack **stack, void (*del)(void*))
+{
+	t_stack	*aux;
+
+	if (!*stack || !del)
+		return ;
+	while (*stack)
+	{
+		aux = (*stack)->next;
+		ft_free(*stack);
+		*stack = aux;
+	}
+}
+
+t_stack	*ft_find_node(t_stack *stack, long nbr)
+{
+	while (stack)
+	{
+		if (stack->nbr == nbr)
+			return (stack);
+		stack = stack->next;
+	}
+	return (NULL);
 }

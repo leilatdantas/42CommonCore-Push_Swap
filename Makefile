@@ -6,7 +6,7 @@
 #    By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/02 11:49:39 by lebarbos          #+#    #+#              #
-#    Updated: 2023/11/06 20:00:22 by lebarbos         ###   ########.fr        #
+#    Updated: 2023/11/07 09:32:20 by lebarbos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,12 @@ OBJ_PATH_BONUS	= objs_checker
 
 #FILES
 NAME			= push_swap
-SRC_FILES		= utils validate error swap rotate reverse_rotate push sorting stack_aux stack_aux2 utils2 sorting_aux calculate_cost algorithm
+SRC_FILES		= utils validate error swap rotate reverse_rotate push sorting stack_aux sorting_aux calculate_cost algorithm
 OBJS			= $(SRC_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJ_PATH)/, $(OBJS))
 #BONUS
 NAME_BONUS		= checker
-SRC_FILES_BONUS = checker
+SRC_FILES_BONUS = checker checker_aux
 OBJS_BONUS		= $(SRC_FILES_BONUS:%=%.o)
 TARGET_BONUS	= $(addprefix $(OBJ_PATH_BONUS)/, $(OBJS_BONUS))
 
