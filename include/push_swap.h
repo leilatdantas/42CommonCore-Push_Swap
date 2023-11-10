@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:55:49 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/07 09:31:55 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/10 10:35:24 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	update_cost(t_stack *src, int size_src, int size_dst);
 
 /*error*/
 void	ft_free(void *x);
-void	ft_error_print(void);
+void	ft_error_print(t_stack *a);
+void	ft_error(void);
 
 /*operations*/
 void	ft_pa(t_stack **a, t_stack **b, int print);
@@ -64,6 +65,7 @@ int		check_bellow_target(t_stack *a, int target);
 void	pre_push(t_stack **stack, t_stack *cheapest, char k);
 void	set_index(t_stack *stack);
 void	set_target(t_stack *src, t_stack *dst);
+t_stack	*find_bellow(t_stack *a, int target);
 
 /*sorting*/
 void	ft_move_to_a(t_stack **src, t_stack **dst);
@@ -92,5 +94,8 @@ bool	validate_stack(int argc, char **argv);
 
 /*checker*/
 t_stack	*get_stack_ch(int argc, char **argv);
+
+void	ft_checker(t_stack **a, t_stack **b);
+void	ft_checker_error(t_stack *a);
 
 #endif

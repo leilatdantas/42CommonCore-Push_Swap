@@ -6,11 +6,33 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:04:39 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/07 09:35:50 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/10 11:48:01 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+
+void	push_b_until_target(t_stack **a, t_stack **b, int target)
+{
+	int	remaining;
+	int	pb_needed;
+
+	pb_needed = check_bellow_target(*a, target);
+	remaining = ft_stack_size(*a);
+	while (remaining > 3 && (pb_needed > 0) && !check_sort(*a))
+	{
+		set_index(*a);
+		pre_push((a), find_bellow(*a, target), 'a');
+		if ((*a)->nbr < target)
+		{
+			ft_pb(a, b, 1);
+			remaining--;
+			pb_needed--;
+		}
+		else
+			ft_ra(a, 1);
+	}
+}
 
 void	ft_move_to_b(t_stack **a, t_stack **b)
 {
@@ -18,26 +40,15 @@ void	ft_move_to_b(t_stack **a, t_stack **b)
 	long	min;
 	long	max;
 	int		target;
-	int		pb_needed;
 
 	remaining = ft_stack_size(*a);
-	while (remaining > 3)
+	while (remaining > 3 && !check_sort(*a))
 	{
+		remaining = ft_stack_size(*a);
 		min = ft_min(*a);
 		max = ft_max(*a);
 		target = min + ((max - min) / 2);
-		pb_needed = check_bellow_target(*a, target);
-		while (remaining > 3 && (pb_needed > 0))
-		{
-			if ((*a)->nbr < target)
-			{
-				ft_pb(a, b, 1);
-				remaining--;
-				pb_needed--;
-			}
-			else
-				ft_ra(a, 1);
-		}
+		push_b_until_target(a, b, target);
 	}
 }
 

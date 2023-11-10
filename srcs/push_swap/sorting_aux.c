@@ -6,7 +6,7 @@
 /*   By: lebarbos <lebarbos@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:00:31 by lebarbos          #+#    #+#             */
-/*   Updated: 2023/11/06 16:21:37 by lebarbos         ###   ########.fr       */
+/*   Updated: 2023/11/10 11:49:15 by lebarbos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ int	check_bellow_target(t_stack *a, int target)
 		a = a->next;
 	}
 	return (result);
+}
+
+t_stack	*find_bellow(t_stack *a, int target)
+{
+	t_stack	*result;
+
+	result = a;
+	while (result->next)
+	{
+		if (result->nbr < target)
+		{
+			return (result);
+		}
+		result = result->next;
+	}
+	return (a);
 }
 
 void	pre_push(t_stack **stack, t_stack *cheapest, char k)
